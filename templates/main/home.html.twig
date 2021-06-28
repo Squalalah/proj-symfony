@@ -1,0 +1,7 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'Home' }} {%  endblock %}
+{% block title 'Home '~parent() %}
+{% block main %}
+    <h2>Homepage</h2>
+    <h3>Nous sommes le {{ date }}</h3>
+{% endblock %}

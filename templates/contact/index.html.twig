@@ -1,0 +1,17 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'Contact' }} {%  endblock %}
+{% block title 'Contact '~parent() %}
+{% block main %}
+    <h2>Voici ma page de contact</h2>
+    {% if (nom is not null) and (prenom is not null) %}
+        <h3>Bonjour {{ nom }} {{ prenom }}</h3>
+    {% else %}
+        <form method="POST" action="{{ path('contact') }}">
+            <label for="nom">Nom</label>
+            <input type="text" name="nom" id="nom">
+            <label for="prenom">Prenom</label>
+            <input type="text" name="prenom" id="prenom">
+            <input type="submit" name="button" id="button">
+        </form>
+    {% endif %}
+{% endblock %}

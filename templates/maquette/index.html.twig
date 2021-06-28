@@ -1,0 +1,29 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %}{{ 'Maquette' }}{% endblock %}
+{% block title 'Maquette'~parent() %}
+{% block main %}
+<section class="container">
+    <div class="row justify-content-center">
+        <div class="col-6" >
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Prénom</th>
+                    <th>Nom</th>
+                    <th>Age</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for acteur in tableau %}
+                <tr>
+                    <td>{{ acteur.prenom }}</td>
+                    <td>{{ acteur.nom }}</td>
+                    <td>{{ acteur.age }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+{% endblock %}

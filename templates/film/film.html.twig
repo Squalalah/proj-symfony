@@ -1,0 +1,23 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'Film' }} {%  endblock %}
+{% block title 'Film '~parent() %}
+{% block main %}
+    <h1>{{ chaine }}</h1>
+    <h2>{{ tableau|join(',') }}</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Index</th>
+                <th>Fruits</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for fruit in tableau %}
+            <tr>
+                <td>{{ loop.index }}</td>
+                <td>{{ fruit }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
