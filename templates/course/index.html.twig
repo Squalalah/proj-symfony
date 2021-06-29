@@ -9,31 +9,33 @@
                 <br>
                 <div class="row">
                     <div class="col-6">
-                        <input id="item" class="form-control" >
+                        <form action='{{ path('course_add') }}' method='POST' name="form_add_course">
+                            <label for="item">Titre :</label>
+                            <input id="item" class="form-control" name='_title'>
+                            <input type="submit" name='_submit'>
+                        </form>
                     </div>
                     <div class="col-2">
-                        <button id="btn1" class="btn btn-success">
-                            <i class="fa fa-plus"></i>
-                        </button>
+                        <a href="{{ path('course_add') }}">Ajouter</a>
                     </div>
                 </div>
                 <br>
+                {% if id is defined %} {{ id }} {% endif %}
                 <table  class="table table-striped">
                     <thead>
-                    <th>Item</th>
-                    <th>Action</th>
+                        <tr>
+                            <th>Item</th>
+                            <th>Action</th>
+                        </tr>
                     </thead>
                     <tbody id="tab1">
                     {% for c in courses %}
-                        {% if c.status %}
-                            <tr>
-                                <td>{{ c.title }}</td>
-                            </tr>
-                            {% else %}
-                            <tr class="table-danger">
-                                <td><strike>{{ c.title }}</strike></td>
-                            <tr>
-                            {% endif %}
+                        <tr class="{% if c.status %}table-danger {% endif %}">
+                            <td>{{ c.title }}</td>
+                            <td>
+                                <a href="{{ path('course_delete', {'id':c.id }) }}">Supprimer</a>
+                                <a href="{{ path('course_update', {'id':c.id }) }}">Modifier Status</a>
+                            </td>
                         </tr>
                     {% endfor %}
                     </tbody>
