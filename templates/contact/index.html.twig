@@ -1,6 +1,6 @@
 {% extends 'template.html.twig' %}
 {% block titleNav %} {{ 'Contact' }} {%  endblock %}
-{% block title 'Contact '~parent() %}
+{% block title %} Contact | {{ parent() }} {% endblock %}
 {% block main %}
     <h2>Voici ma page de contact</h2>
     {% if (nom is not null) and (prenom is not null) %}
