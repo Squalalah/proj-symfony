@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : mar. 29 juin 2021 à 17:07
+-- Généré le : mer. 30 juin 2021 à 15:30
 -- Version du serveur : 10.4.19-MariaDB
 -- Version de PHP : 8.0.7
 
@@ -96,7 +96,7 @@ ALTER TABLE `couleur`
 -- AUTO_INCREMENT pour la table `course`
 --
 ALTER TABLE `course`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

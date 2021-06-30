@@ -3,11 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Course;
-use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,14 +13,13 @@ use Symfony\Component\HttpFoundation\Request;
 class CourseController extends AbstractController
 {
     #[Route('/course', name: 'course')]
-    public function index(EntityManagerInterface $em, CourseRepository $course, Request $request): Response
+    public function index(CourseRepository $course): Response
     {
-        $form = $this->formHandle($request, $em);
+        //C'est ici que le formulaire doit être créer
         $liste = $course->findAll();
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
-            'courses' => $liste,
-            'formCourse' => $form->createView()
+            'courses' => $liste
         ]);
     }
     #[Route('/course/delete/{id}', name: 'course_delete')]
@@ -49,18 +46,5 @@ class CourseController extends AbstractController
             $em->flush();
         }
         return $this->redirectToRoute('course');
-    }
-
-    public function formHandle(Request $request, EntityManagerInterface $em) : FormInterface {
-        $courseObject = new Course();
-        $form = $this->createForm(CourseType::class, $courseObject);
-        $form->handleRequest($request);
-        if($form->isSubmitted() && $form->isValid()) {
-            $courseObject = $form->getData();
-            $courseObject->setStatus(false);
-            $em->persist($courseObject);
-            $em->flush();
-        }
-        return $form;
     }
 }
