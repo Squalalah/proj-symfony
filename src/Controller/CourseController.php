@@ -36,7 +36,6 @@ class CourseController extends AbstractController
         $c->setStatus(!$c->getStatus());
         $em->flush();
         return $this->redirectToRoute('course');
-
     }
     #[Route('/course/add', name: 'course_add')]
     public function addCourse(Request $request, EntityManagerInterface $em) : Response {

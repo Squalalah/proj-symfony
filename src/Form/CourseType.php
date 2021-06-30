@@ -20,6 +20,7 @@ class CourseType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Course::class,
+            'attr' => ['id' => 'form']
         ]);
     }
 }
