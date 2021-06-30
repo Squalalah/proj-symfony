@@ -1,0 +1,3 @@
+- Effectuer un git clone
+- Se placer dans le dossier du projet (demo ici) dans le terminal
+- effectuer 'composer update' pour récupérer les bundles manquants.

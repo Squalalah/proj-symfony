@@ -17,7 +17,6 @@ class CourseController extends AbstractController
     #[Route('/course', name: 'course')]
     public function index(EntityManagerInterface $em, CourseRepository $course, Request $request): Response
     {
-        /* @var FormInterface $form */
         $form = $this->formHandle($request, $em);
         $liste = $course->findAll();
         return $this->render('course/index.html.twig', [
