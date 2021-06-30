@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Course;
+use App\Form\CourseType;
 use App\Repository\CourseRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,12 +15,15 @@ use Symfony\Component\HttpFoundation\Request;
 class CourseController extends AbstractController
 {
     #[Route('/course', name: 'course')]
-    public function index(CourseRepository $course): Response
+    public function index(EntityManagerInterface $em, CourseRepository $course, Request $request): Response
     {
+        /* @var FormInterface $form */
+        $form = $this->formHandle($request, $em);
         $liste = $course->findAll();
         return $this->render('course/index.html.twig', [
             'controller_name' => 'CourseController',
-            'courses' => $liste
+            'courses' => $liste,
+            'formCourse' => $form->createView()
         ]);
     }
     #[Route('/course/delete/{id}', name: 'course_delete')]
@@ -34,7 +39,6 @@ class CourseController extends AbstractController
         return $this->redirectToRoute('course');
 
     }
-
     #[Route('/course/add', name: 'course_add')]
     public function addCourse(Request $request, EntityManagerInterface $em) : Response {
         $title = $request->request->get('_title');
@@ -47,5 +51,18 @@ class CourseController extends AbstractController
             $em->flush();
         }
         return $this->redirectToRoute('course');
+    }
+
+    public function formHandle(Request $request, EntityManagerInterface $em) : FormInterface {
+        $courseObject = new Course();
+        $form = $this->createForm(CourseType::class, $courseObject);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()) {
+            $courseObject = $form->getData();
+            $courseObject->setStatus(false);
+            $em->persist($courseObject);
+            $em->flush();
+        }
+        return $form;
     }
 }
