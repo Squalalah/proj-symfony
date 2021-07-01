@@ -1,0 +1,29 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'idee_show' }} {%  endblock %}
+
+{% block title %}Idee{% endblock %}
+
+{% block main %}
+    <h1>Idee</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ idee.id }}</td>
+                <td>{{ category.id }}</td>
+            </tr>
+            <tr>
+                <th>Title</th>
+                <td>{{ idee.title }}</td>
+                <td>{{  category.title }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('idee_index') }}">back to list</a>
+
+    <a href="{{ path('idee_edit', {'id': idee.id}) }}">edit</a>
+
+    {{ include('idee/_delete_form.html.twig') }}
+{% endblock %}

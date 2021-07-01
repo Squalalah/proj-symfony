@@ -1,0 +1,11 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'idee_new' }} {%  endblock %}
+{% block title %}New Idee{% endblock %}
+
+{% block main %}
+    <h1>Create new Idee</h1>
+
+    {{ include('idee/_form.html.twig') }}
+
+    <a href="{{ path('idee_index') }}">back to list</a>
+{% endblock %}

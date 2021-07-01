@@ -1,0 +1,12 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'idee_edit' }} {%  endblock %}
+
+{% block main %}
+    <h1>Edit Idee</h1>
+
+    {{ include('idee/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('idee_index') }}">back to list</a>
+
+    {{ include('idee/_delete_form.html.twig') }}
+{% endblock %}

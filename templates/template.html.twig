@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container px-5">
-            <a class="navbar-brand" id="navTitle" href="{{ path(get_route) }}">{% block titleNav %} Nav {%  endblock %}</a>
+            {# <a class="navbar-brand" id="navTitle" href="{{ path(get_route) }}">{% block titleNav %} Nav {%  endblock %}</a> #}
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
@@ -21,6 +21,8 @@
                     <li class="nav-item"><a class="nav-link {% if get_route == 'film'     %}active{% endif %}" href="{{ path('film') }}">Film</a></li>
                     <li class="nav-item"><a class="nav-link {% if get_route == 'contact'  %}active{% endif %}" href="{{ path('contact') }}">Contact</a></li>
                     <li class="nav-item"><a class="nav-link {% if get_route == 'course'   %}active{% endif %}" href="{{ path('course') }}">Courses</a></li>
+                    <li class="nav-item"><a class="nav-link {% if get_route == 'categ_index'%}active{% endif %}" href="{{ path('categ_index') }}">Catégorie</a></li>
+                    <li class="nav-item"><a class="nav-link {% if get_route == 'idee_index'%}active{% endif %}" href="{{ path('idee_index') }}">Idées</a></li>
                     <li class="nav-item"><a class="nav-link {% if get_route == 'home'     %}active{% endif %}" href="{{ path('home') }}">Home</a></li>
                 </ul>
             </div>

@@ -1,0 +1,36 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'categ_index' }} {%  endblock %}
+{% block title %}Categ index{% endblock %}
+
+{% block main %}
+
+    <h1>Categ index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for categ in categs %}
+            <tr>
+                <td>{{ categ.id }}</td>
+                <td>{{ categ.title }}</td>
+                <td>
+                    <a href="{{ path('categ_show', {'id': categ.id}) }}">show</a>
+                    <a href="{{ path('categ_edit', {'id': categ.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('categ_new') }}">Create new</a>
+{% endblock %}

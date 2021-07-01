@@ -1,0 +1,38 @@
+{% extends 'template.html.twig' %}
+{% block titleNav %} {{ 'idee_index' }} {%  endblock %}
+
+{% block title %}Idee index{% endblock %}
+
+{% block main %}
+    <h1>Idee index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Category</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for idee in idees %}
+            <tr>
+                <td>{{ idee.id }}</td>
+                <td>{{ idee.title }}</td>
+                <td>{{ idee.ideeCategory.title }}</td>
+                <td>
+                    <a href="{{ path('idee_show', {'id': idee.id}) }}">show</a>
+                    <a href="{{ path('idee_edit', {'id': idee.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('idee_new') }}">Create new</a>
+{% endblock %}
