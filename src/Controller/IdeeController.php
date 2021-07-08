@@ -35,7 +35,6 @@ class IdeeController extends AbstractController
 
             return $this->redirectToRoute('idee_index');
         }
-
         return $this->render('idee/new.html.twig', [
             'idee' => $idee,
             'form' => $form->createView(),

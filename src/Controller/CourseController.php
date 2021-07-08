@@ -17,6 +17,7 @@ class CourseController extends AbstractController
     #[Route('/course', name: 'course')]
     public function index(EntityManagerInterface $em, CourseRepository $course, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $form = $this->formHandle($request, $em);
         $liste = $course->findAll();
         return $this->render('course/index.html.twig', [
@@ -25,20 +26,26 @@ class CourseController extends AbstractController
             'formCourse' => $form->createView()
         ]);
     }
+
     #[Route('/course/delete/{id}', name: 'course_delete')]
     public function delete(Course $c,EntityManagerInterface $em) : Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $em->remove($c);
         $em->flush();
         return $this->redirectToRoute('course');
     }
+
     #[Route('/course/update/{id}', name: 'course_update')]
     public function update(Course $c, EntityManagerInterface $em) : Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $c->setStatus(!$c->getStatus());
         $em->flush();
         return $this->redirectToRoute('course');
     }
+
     #[Route('/course/add', name: 'course_add')]
     public function addCourse(Request $request, EntityManagerInterface $em) : Response {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $title = $request->request->get('_title');
         if($title != null && strlen($title) > 0) {
             $title = htmlspecialchars($title);
@@ -52,6 +59,7 @@ class CourseController extends AbstractController
     }
 
     public function formHandle(Request $request, EntityManagerInterface $em) : FormInterface {
+        $this->denyAccessUnlessGranted('ROLE_USER');
         $courseObject = new Course();
         $form = $this->createForm(CourseType::class, $courseObject);
         $form->handleRequest($request);
