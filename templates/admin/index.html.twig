@@ -3,9 +3,20 @@
 {% block title %}Hello AdminController!{% endblock %}
 
 {% block main %}
+    <script>
+        $(document).ready(function(){
+            $("#myInput").on("keyup", function() {
+                var value = $(this).val().toLowerCase();
+                $("#myTable tr").filter(function() {
+                    $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+                });
+            });
+        });
+    </script>
 <div class="container">
     <div class="row">
         <div class="col-6">
+            <input type="text" id="myInput">
             <table>
                 <thead>
                 <tr>
@@ -13,12 +24,12 @@
                     <th>Role</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody id="myTable">
                 {% for user in users %}
                     <tr>
                         <td>{{ user.email }}</td>
                         <td>{% for role in user.roles %}
-                            {{ role }},
+                            {{ role }}
                         {% endfor %}</td>
                         <td><a href="{{ path('admin_edit', {'id':user.id }) }}">Ajouter/Retirer admin</a></td>
                         <td><a href="{{ path('admin_delete', {'id':user.id }) }}">Supprimer</a></td>
@@ -31,3 +42,5 @@
     </div>
 </div>
 {% endblock %}
+
+
